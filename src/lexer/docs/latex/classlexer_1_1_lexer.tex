@@ -1,0 +1,91 @@
+\hypertarget{classlexer_1_1_lexer}{}\section{lexer.\+Lexer 類別 參考文件}
+\label{classlexer_1_1_lexer}\index{lexer.\+Lexer@{lexer.\+Lexer}}
+\subsection*{公開方法(Public Methods)}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classlexer_1_1_lexer_a74a5b43c328f1ed535ce18f4047e5eec}{Lexer} ()
+\item 
+\hyperlink{classlexer_1_1_token}{Token} \hyperlink{classlexer_1_1_lexer_a1f77e6a104c8d9f9c58aa303adfc9e9c}{scan} ()  throws I\+O\+Exception 
+\end{DoxyCompactItemize}
+\subsection*{公開屬性}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classlexer_1_1_lexer_aa3f0241bd211c220367e73def9003d94}{line} = 1
+\end{DoxyCompactItemize}
+
+
+\subsection{建構子與解構子說明文件}
+\index{lexer\+::\+Lexer@{lexer\+::\+Lexer}!Lexer@{Lexer}}
+\index{Lexer@{Lexer}!lexer\+::\+Lexer@{lexer\+::\+Lexer}}
+\subsubsection[{\texorpdfstring{Lexer()}{Lexer()}}]{\setlength{\rightskip}{0pt plus 5cm}lexer.\+Lexer.\+Lexer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlexer_1_1_lexer_a74a5b43c328f1ed535ce18f4047e5eec}{}\label{classlexer_1_1_lexer_a74a5b43c328f1ed535ce18f4047e5eec}
+
+\begin{DoxyCode}
+15                    \{
+16         reserve(\textcolor{keyword}{new} Word(Tag.TRUE, \textcolor{stringliteral}{"true"}));
+17         reserve(\textcolor{keyword}{new} Word(Tag.FALSE, \textcolor{stringliteral}{"false"}));
+18     \}
+\end{DoxyCode}
+
+
+\subsection{函式成員說明文件}
+\index{lexer\+::\+Lexer@{lexer\+::\+Lexer}!scan@{scan}}
+\index{scan@{scan}!lexer\+::\+Lexer@{lexer\+::\+Lexer}}
+\subsubsection[{\texorpdfstring{scan()}{scan()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Token} lexer.\+Lexer.\+scan (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) throws I\+O\+Exception\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classlexer_1_1_lexer_a1f77e6a104c8d9f9c58aa303adfc9e9c}{}\label{classlexer_1_1_lexer_a1f77e6a104c8d9f9c58aa303adfc9e9c}
+
+\begin{DoxyCode}
+20                                            \{
+21         \textcolor{keywordflow}{for} (; ; peek = (char) System.in.read()) \{
+22             \textcolor{keywordflow}{if} (peek == \textcolor{charliteral}{' '} || peek == \textcolor{charliteral}{'\(\backslash\)t'}) \textcolor{keywordflow}{continue};
+23             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (peek == \textcolor{charliteral}{'\(\backslash\)n'}) \hyperlink{classlexer_1_1_lexer_aa3f0241bd211c220367e73def9003d94}{line}++;
+24             \textcolor{keywordflow}{else} \textcolor{keywordflow}{break};
+25         \}
+26 
+27         \textcolor{keywordflow}{if} (Character.isDigit(peek)) \{
+28             \textcolor{keywordtype}{int} v = 0;
+29             \textcolor{keywordflow}{do} \{
+30                 v = 10 * v + Character.digit(peek, 10);
+31                 peek = (char) System.in.read();
+32             \} \textcolor{keywordflow}{while} (Character.isDigit(peek));
+33 
+34             \textcolor{keywordflow}{return} \textcolor{keyword}{new} Num(v);
+35         \}
+36 
+37         \textcolor{keywordflow}{if} (Character.isLetter(peek)) \{
+38             StringBuffer b = \textcolor{keyword}{new} StringBuffer();
+39             \textcolor{keywordflow}{do} \{
+40                 b.append(peek);
+41                 peek = (char) System.in.read();
+42             \} \textcolor{keywordflow}{while} (Character.isLetterOrDigit(peek));
+43 
+44             String s = b.toString();
+45             Word w = (Word) words.get(s);
+46             \textcolor{keywordflow}{if} (w != null) \textcolor{keywordflow}{return} w;
+47             w = \textcolor{keyword}{new} Word(Tag.ID, s);
+48             words.put(s, w);
+49             \textcolor{keywordflow}{return} w;
+50         \}
+51 
+52         Token t = \textcolor{keyword}{new} Token(peek);
+53         peek = \textcolor{charliteral}{' '};
+54         \textcolor{keywordflow}{return} t;
+55     \}
+\end{DoxyCode}
+
+
+\subsection{資料成員說明文件}
+\index{lexer\+::\+Lexer@{lexer\+::\+Lexer}!line@{line}}
+\index{line@{line}!lexer\+::\+Lexer@{lexer\+::\+Lexer}}
+\subsubsection[{\texorpdfstring{line}{line}}]{\setlength{\rightskip}{0pt plus 5cm}int lexer.\+Lexer.\+line = 1}\hypertarget{classlexer_1_1_lexer_aa3f0241bd211c220367e73def9003d94}{}\label{classlexer_1_1_lexer_aa3f0241bd211c220367e73def9003d94}
+
+
+此類別(class) 文件是由下列檔案中產生\+:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_lexer_8java}{Lexer.\+java}\end{DoxyCompactItemize}
