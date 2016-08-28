@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 public class Lexer {
-    public int line = 1;
+    public static int line = 1;
     private char peek = ' ';
     private Hashtable words = new Hashtable();
 
